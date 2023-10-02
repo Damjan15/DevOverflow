@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import Theme from "./Theme";
+import MobileNav from "./MobileNav";
+import GlobalSearch from "../search/GlobalSearch";
 
 const Navbar = () => {
   return (
@@ -17,12 +19,12 @@ const Navbar = () => {
           alt="DevFlow"
         />
 
-        <p className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900">
+        <p className="h2-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden">
           Dev <span className="text-primary-500">OverFlow</span>
         </p>
       </Link>
 
-      {/* @todo -> GlobalSearch Component */}
+      <GlobalSearch />
 
       <div className="flex-between gap-5">
         <Theme />
@@ -41,7 +43,7 @@ const Navbar = () => {
           />
         </SignedIn>
 
-        {/* @todo -> MobileNavigation Bar */}
+        <MobileNav />
       </div>
     </nav>
   );
