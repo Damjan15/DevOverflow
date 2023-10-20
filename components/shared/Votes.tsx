@@ -25,6 +25,13 @@ const Votes = ({
   hasDownvoted,
   hasSaved,
 }: Props) => {
+  const handleSave = () => {
+    console.log("Handle Save!");
+  };
+
+  const handleVote = (action: string) => {
+    console.log("Handle Vote!");
+  };
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
@@ -39,7 +46,7 @@ const Votes = ({
             height={18}
             alt="upvote"
             className="cursor-pointer"
-            onClick={() => console.log("Hello World!")}
+            onClick={handleVote("upvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -60,7 +67,7 @@ const Votes = ({
             height={18}
             alt="downvote"
             className="cursor-pointer"
-            onClick={() => console.log("Hello World!")}
+            onClick={handleVote("downvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -81,7 +88,7 @@ const Votes = ({
         height={18}
         alt="saved"
         className="cursor-pointer"
-        onClick={() => console.log("Hello World!")}
+        onClick={handleSave}
       />
     </div>
   );
