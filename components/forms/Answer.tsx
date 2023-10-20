@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormMessage,
@@ -14,6 +12,7 @@ import { AnswerSchema } from "@/lib/validations";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Editor } from "@tinymce/tinymce-react";
+import { useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeProvider";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -29,9 +28,8 @@ interface Props {
 const Answer = ({ question, questionId, authorId }: Props) => {
   const pathname = usePathname();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const editorRef = useRef(null);
   const { mode } = useTheme();
+  const editorRef = useRef(null);
   const form = useForm<z.infer<typeof AnswerSchema>>({
     resolver: zodResolver(AnswerSchema),
     defaultValues: {
@@ -54,11 +52,11 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
+
         editor.setContent("");
       }
     } catch (error) {
       console.log(error);
-      throw Error;
     } finally {
       setIsSubmitting(false);
     }
@@ -72,8 +70,8 @@ const Answer = ({ question, questionId, authorId }: Props) => {
         </h4>
 
         <Button
-          className="btn light-border-2 gap-2.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none"
-          onClick={() => console.log("Hello World!")}
+          className="btn light-border-2 gap-1.5 rounded-md px-4 py-2.5 text-primary-500 shadow-none dark:text-primary-500"
+          onClick={() => {}}
         >
           <Image
             src="/assets/icons/stars.svg"
@@ -82,9 +80,10 @@ const Answer = ({ question, questionId, authorId }: Props) => {
             height={12}
             className="object-contain"
           />
-          Generate AI Answer
+          Generate an AI Answer
         </Button>
       </div>
+
       <Form {...form}>
         <form
           className="mt-6 flex w-full flex-col gap-10"
@@ -118,18 +117,16 @@ const Answer = ({ question, questionId, authorId }: Props) => {
                         "anchor",
                         "searchreplace",
                         "visualblocks",
-                        "code",
+                        "codesample",
                         "fullscreen",
                         "insertdatetime",
                         "media",
                         "table",
-                        "codesample",
                       ],
                       toolbar:
-                        "undo redo | blocks | " +
-                        "codesample | bold italic forecolor | alignleft aligncenter " +
-                        "alignright alignjustify | bullist numlist outdent indent | " +
-                        "removeformat | help",
+                        "undo redo | " +
+                        "codesample | bold italic forecolor | alignleft aligncenter |" +
+                        "alignright alignjustify | bullist numlist",
                       content_style:
                         "body { font-family:Inter; font-size:16px }",
                       skin: mode === "dark" ? "oxide-dark" : "oxide",
@@ -137,10 +134,6 @@ const Answer = ({ question, questionId, authorId }: Props) => {
                     }}
                   />
                 </FormControl>
-                <FormDescription className="body-regular mt-2.5 text-light-500">
-                  Introduce the problem and expand on what you put in the title.
-                  Minimum 20 characters.
-                </FormDescription>
                 <FormMessage className="text-red-500" />
               </FormItem>
             )}

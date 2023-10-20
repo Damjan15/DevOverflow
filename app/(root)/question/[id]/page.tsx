@@ -9,15 +9,17 @@ import RenderTag from "@/components/shared/RenderTag";
 import Answer from "@/components/forms/Answer";
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/user.action";
+import AllAnswers from "@/components/shared/AllAnswers";
 
 const QuestionDetails = async ({ params }: any) => {
-  const result = await getQuestionById({ questionId: params.id });
   const { userId: clerkId } = auth();
   let mongoUser;
 
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
+
+  const result = await getQuestionById({ questionId: params.id });
   return (
     <>
       <div className="flex-start w-full flex-col">
@@ -85,6 +87,11 @@ const QuestionDetails = async ({ params }: any) => {
         ))}
       </div>
 
+      <AllAnswers
+        questionId={result._id}
+        userId={mongoUser._id}
+        totalAnswers={result.answers.length}
+      />
       <Answer
         question={result.content}
         questionId={JSON.stringify(result._id)}
