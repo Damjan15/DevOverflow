@@ -3,15 +3,20 @@
 import React from "react";
 import Image from "next/image";
 import { formatAndDivideNumber } from "@/lib/utils";
+import {
+  downvoteQuestion,
+  upvoteQuestion,
+} from "@/lib/actions/question.action";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   type: string;
   itemId: string;
   userId: string;
   upvotes: number;
-  hasUpvoted: boolean;
+  hasupVoted: boolean;
   downvotes: number;
-  hasDownvoted: boolean;
+  hasdownVoted: boolean;
   hasSaved?: boolean;
 }
 
@@ -20,25 +25,76 @@ const Votes = ({
   itemId,
   userId,
   upvotes,
-  hasUpvoted,
+  hasupVoted,
   downvotes,
-  hasDownvoted,
+  hasdownVoted,
   hasSaved,
 }: Props) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const handleSave = () => {
     console.log("Handle Save!");
   };
 
-  const handleVote = (action: string) => {
-    console.log("Handle Vote!");
+  const handleVote = async (action: string) => {
+    if (!userId) {
+      return;
+    }
+
+    if (action === "upvote") {
+      if (type === "Question") {
+        await upvoteQuestion({
+          questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
+      } else if (type === "Answer") {
+        // await upvoteAnswer({
+        //   answerId: JSON.parse(itemId),
+        //   userId: JSON.parse(userId),
+        //   hasupVoted,
+        //   hasdownVoted,
+        //   path: pathname,
+        // })
+      }
+
+      // @todo -> Show a toast
+      return;
+    }
+
+    if (action === "downvote") {
+      if (type === "Question") {
+        await downvoteQuestion({
+          questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
+      } else if (type === "Answer") {
+        //   await downvoteAnswer({
+        //     answerId: JSON.parse(itemId),
+        //     userId: JSON.parse(userId),
+        //     hasupVoted,
+        //     hasdownVoted,
+        //     path: pathname,
+        //   })
+      }
+
+      // @todo -> Show toast
+    }
   };
+
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
         <div className="flex-center gap-1.5">
           <Image
             src={
-              hasUpvoted
+              hasupVoted
                 ? "/assets/icons/upvoted.svg"
                 : "/assets/icons/upvote.svg"
             }
@@ -46,7 +102,7 @@ const Votes = ({
             height={18}
             alt="upvote"
             className="cursor-pointer"
-            onClick={handleVote("upvote")}
+            onClick={() => handleVote("upvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -59,7 +115,7 @@ const Votes = ({
         <div className="flex-center gap-1.5">
           <Image
             src={
-              hasDownvoted
+              hasdownVoted
                 ? "/assets/icons/downvoted.svg"
                 : "/assets/icons/downvote.svg"
             }
@@ -67,7 +123,7 @@ const Votes = ({
             height={18}
             alt="downvote"
             className="cursor-pointer"
-            onClick={handleVote("downvote")}
+            onClick={() => handleVote("downvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">

@@ -111,7 +111,7 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
     });
 
     if (!question) {
-      throw new Error("Question not found!");
+      throw new Error("Question not found");
     }
 
     // @todo -> Increment author's reputation
@@ -123,7 +123,7 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
   }
 }
 
-export async function downVoteQuestion(params: QuestionVoteParams) {
+export async function downvoteQuestion(params: QuestionVoteParams) {
   try {
     connectToDatabase();
 
@@ -132,7 +132,7 @@ export async function downVoteQuestion(params: QuestionVoteParams) {
     let updateQuery = {};
 
     if (hasdownVoted) {
-      updateQuery = { $pull: { downvotes: userId } };
+      updateQuery = { $pull: { downvote: userId } };
     } else if (hasupVoted) {
       updateQuery = {
         $pull: { upvotes: userId },
@@ -147,7 +147,7 @@ export async function downVoteQuestion(params: QuestionVoteParams) {
     });
 
     if (!question) {
-      throw new Error("Question not found!");
+      throw new Error("Question not found");
     }
 
     // @todo -> Increment author's reputation
