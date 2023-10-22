@@ -101,8 +101,12 @@ const Profile = async ({ params, searchParams }: URLProps) => {
               clerkId={clerkId}
             />
           </TabsContent>
-          <TabsContent value="answers">
-            <AnswerTab />
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            <AnswerTab
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
           </TabsContent>
         </Tabs>
       </div>
