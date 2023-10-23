@@ -14,14 +14,13 @@ const AnswerTab = async ({ searchParams, userId, clerkId }: Props) => {
     page: 1,
   });
 
-  console.log(result.answers);
-
   return (
     <>
       {result.answers.map((item) => (
         <AnswerCard
           key={item._id}
           _id={item._id}
+          clerkId={clerkId}
           question={item.question}
           author={item.author}
           upvotes={item.upvotes.length}
