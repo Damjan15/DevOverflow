@@ -15,6 +15,7 @@ import User from "@/database/user.modal";
 import { revalidatePath } from "next/cache";
 import Answer from "@/database/answer.modal";
 import Interaction from "@/database/interaction.modal";
+import { FilterQuery } from "mongoose";
 
 export async function createQuestion(params: CreateQuestionParams) {
   try {
@@ -57,7 +58,18 @@ export async function getQuestions(params: GetQuestionsParams) {
   try {
     connectToDatabase();
 
-    const questions = await Question.find({})
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof Question> = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: new RegExp(searchQuery, "i") } },
+        { content: { $regex: new RegExp(searchQuery, "i") } },
+      ];
+    }
+
+    const questions = await Question.find(query)
       .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
       .sort({ createdAt: -1 });
