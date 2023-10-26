@@ -4,10 +4,13 @@ import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import { getAllUsers } from "@/lib/actions/user.action";
 import UserCard from "@/components/cards/UserCard";
 import { SearchParamsProps } from "@/types";
+import Filter from "@/components/shared/Filter";
+import { UserFilters } from "@/constants/filters";
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
 
   return (
@@ -21,6 +24,11 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for amazing minds"
           otherClasses="flex-1"
+        />
+
+        <Filter
+          filters={UserFilters}
+          otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
 
