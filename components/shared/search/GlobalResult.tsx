@@ -32,8 +32,6 @@ const GlobalResult = () => {
         setIsLoading(false);
       }
     };
-
-    fetchResult();
   }, [global, type]);
 
   const renderLink = (type: string, id: string) => {
