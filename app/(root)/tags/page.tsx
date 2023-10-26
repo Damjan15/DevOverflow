@@ -4,10 +4,13 @@ import LocalSearchBar from "@/components/shared/search/LocalSearchBar";
 import NoResult from "@/components/shared/NoResult";
 import { getAllTags } from "@/lib/actions/tag.actions";
 import { SearchParamsProps } from "@/types";
+import Filter from "@/components/shared/Filter";
+import { TagFilters } from "@/constants/filters";
 
 const Tags = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllTags({
     searchQuery: searchParams.q,
+    filter: searchParams.filter,
   });
 
   return (
@@ -21,6 +24,11 @@ const Tags = async ({ searchParams }: SearchParamsProps) => {
           imgSrc="/assets/icons/search.svg"
           placeholder="Search for tags"
           otherClasses="flex-1"
+        />
+
+        <Filter
+          filters={TagFilters}
+          otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
 

@@ -12,7 +12,7 @@ import { getUserById } from "@/lib/actions/user.action";
 import AllAnswers from "@/components/shared/AllAnswers";
 import Votes from "@/components/shared/Votes";
 
-const QuestionDetails = async ({ params }: any) => {
+const QuestionDetails = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
   let mongoUser;
 
@@ -103,6 +103,7 @@ const QuestionDetails = async ({ params }: any) => {
         questionId={result._id}
         userId={mongoUser._id}
         totalAnswers={result.answers.length}
+        filter={searchParams?.filter}
       />
       <Answer
         question={result.content}
