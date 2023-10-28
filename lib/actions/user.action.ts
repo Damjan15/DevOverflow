@@ -74,11 +74,6 @@ export async function deleteUser(params: DeleteUserParams) {
       throw new Error("User not found!");
     }
 
-    // Get User Question IDS
-    // const userQuestionIds = await Question.find({ author: user._id }).distinct(
-    //   "_id"
-    // );
-
     // Delete User Questions
     await Question.deleteMany({ author: user._id });
 
@@ -91,16 +86,6 @@ export async function deleteUser(params: DeleteUserParams) {
     console.log(error);
   }
 }
-
-// export async function getAllUsers(params: GetAllUsersParams) {
-//   try {
-//     connectToDatabase();
-
-//   } catch (error) {
-//     console.log(error);
-//     throw error;
-//   }
-// }
 
 export async function getAllUsers(params: GetAllUsersParams) {
   try {
@@ -352,7 +337,7 @@ export async function getUserAnswers(params: GetUserStatsParams) {
   try {
     connectToDatabase();
 
-    const { userId, page = 1, pageSize = 10 } = params;
+    const { userId } = params;
 
     const totalAnswers = await Answer.countDocuments({ author: userId });
     const userAnswers = await Answer.find({ author: userId })
