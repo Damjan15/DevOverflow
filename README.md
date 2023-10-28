@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dev Overflow | Modern StackOverflow Clone
 
-## Getting Started
+![demo light](https://i.ibb.co/7kJWbP6/devoverflow-light.png)
+![demo dark](https://i.ibb.co/26p8cyz/devoverflow-dark.png)
 
-First, run the development server:
+[![website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](website)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Here is a working live demo: https://dev-overflow-lilac.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📝 Description
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Welcome to Dev Overflow! Dev Overflow is a modern recration of StackOverflow, with some extra features that you can find down below.
 
-## Learn More
+- Motivation: I was motivated to build this project because I wanted to learn and test my skills.
+- Why I Built This Project: My main goal was to create a new user-friendly solution to StackOverflow, and also add couple of new functionalities.
+- Problem Solved: This project aims to simplify a particular task, making it more efficient and accessible.
+- What I Learned: Throughout the development process, I gained valuable insights into various technologies and programming concepts. Such as user authentication using Clerk, using MongoDB as a non-relational document database, using TailwindCSS for the User Interface and much more.
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Log In / Log Out Functionality
+- Sign In / Sign Up Functionality
+- Create / Read / Update / Delete a Question
+- Upvote / Downvote a Question
+- Comment on Question
+- Save question to your collection
+- Global & Local Search
+- Filtering Functionality
+- And a lot more.
